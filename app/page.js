@@ -60,248 +60,323 @@ export default function Dashboard() {
 
       {/* HERO */}
 
-<section
-  className="relative w-full h-[300px] overflow-hidden rounded-3xl bg-[#eaf6ff] bg-cover bg-center"
-  style={{
-    backgroundImage: "url('/images/piketku-hero.png')",
-  }}
->
+      {/* HERO */}
+<section className="relative w-full overflow-hidden rounded-3xl bg-[#eaf6ff] min-h-[280px] sm:min-h-[300px] lg:min-h-[320px]">
+
+  {/* Background image */}
+  <img
+    src="/images/piketku-hero.png"
+    alt=""
+    className="
+      absolute inset-0
+      h-full w-full
+      object-cover
+      object-[65%_center]
+      sm:object-[68%_center]
+      lg:object-center
+    "
+  />
+
   {/* Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/65 to-transparent" />
+  <div className="
+    absolute inset-0
+    bg-gradient-to-r
+    from-white/95
+    via-white/80
+    to-white/10
+    sm:from-white/95
+    sm:via-white/65
+    sm:to-transparent
+  " />
 
   {/* Content */}
-  <div className="relative z-10 flex h-full items-center px-8 md:px-10">
-    <div className="max-w-lg">
-      <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700">
+  <div className="
+    relative z-10
+    flex min-h-[280px]
+    items-center
+    px-5 py-8
+    sm:min-h-[300px] sm:px-8
+    lg:min-h-[320px] lg:px-10
+  ">
+    <div className="max-w-[55%] sm:max-w-lg">
+
+      <span className="
+        inline-flex
+        rounded-full
+        bg-blue-100
+        px-3 py-1
+        text-[11px] font-bold
+        text-blue-700
+        sm:text-xs
+      ">
         PiketKu
       </span>
 
-      <h1 className="mt-4 text-3xl font-bold text-[#10264d] md:text-4xl">
+      <h1 className="
+        mt-3
+        text-2xl font-extrabold
+        leading-tight tracking-tight
+        text-[#10264d]
+        sm:mt-4 sm:text-3xl
+        lg:text-4xl
+      ">
         Catat Kehadiran
       </h1>
 
-      <p className="mt-3 text-sm leading-6 text-slate-600 md:text-base">
+      <p className="
+        mt-2
+        max-w-md
+        text-xs leading-5
+        text-slate-600
+        sm:mt-3 sm:text-sm sm:leading-6
+        lg:text-base
+      ">
         Kelola jadwal piket dan catat kehadiran pegawai
         dengan lebih mudah dan teratur.
       </p>
 
-      <button className="mt-5 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-200 hover:bg-blue-700">
+      <button className="
+        mt-4
+        rounded-xl
+        bg-blue-600
+        px-4 py-2.5
+        text-xs font-bold
+        text-white
+        shadow-lg shadow-blue-200
+        transition
+        hover:bg-blue-700
+        sm:mt-5 sm:px-5 sm:py-3 sm:text-sm
+      ">
         + Tambah Piket
       </button>
+
     </div>
   </div>
 </section>
 
 
-      {/* STATS */}
+      {/* MAIN */}
 
-      <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="mt-4 grid gap-4 sm:mt-5 sm:gap-5 lg:grid-cols-[1.65fr_0.85fr]">
 
-        <Stat
-          icon={<Users />}
-          title="Total Pegawai"
-          value="24"
-          color="blue"
-        />
+  {/* TODAY */}
+  <section className="min-w-0 rounded-[25px] border border-blue-100 bg-white p-4 shadow-sm sm:p-6">
 
-        <Stat
-          icon={<ClipboardList />}
-          title="Piket Bulan Ini"
-          value="18"
-          color="red"
-        />
+    {/* HEADER */}
+    <div className="mb-4 flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between">
 
-        <Stat
-          icon={<CheckCircle2 />}
-          title="Tepat Waktu"
-          value="156"
-          badge="82%"
-          color="green"
-        />
+      <div>
+        <div className="flex items-center gap-2">
+          <CalendarDays
+            size={20}
+            className="shrink-0 text-blue-600"
+          />
 
-        <Stat
-          icon={<Clock3 />}
-          title="Terlambat"
-          value="34"
-          badge="18%"
-          color="red"
-        />
+          <h2 className="font-extrabold text-slate-800">
+            Piket Hari Ini
+          </h2>
+        </div>
+
+        <p className="mt-1 pl-7 text-xs text-slate-400">
+          18 September 2026
+        </p>
+      </div>
+
+      <Link
+        href="/pickets"
+        className="self-start text-xs font-bold text-blue-600 transition hover:text-blue-700 sm:self-auto"
+      >
+        Lihat Detail →
+      </Link>
+
+    </div>
+
+
+    {/* INFO */}
+    <div className="mb-4 grid gap-3 sm:mb-5 sm:grid-cols-2">
+
+      {/* JADWAL */}
+      <div className="flex items-center gap-3 rounded-2xl bg-[#eff8ff] p-3.5 sm:gap-4 sm:p-4">
+
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white text-blue-600 sm:h-12 sm:w-12">
+          <Clock3 size={22} />
+        </div>
+
+        <div className="min-w-0">
+          <p className="text-xs text-slate-400">
+            Jadwal Masuk
+          </p>
+
+          <p className="text-xl font-black text-slate-800 sm:text-2xl">
+            08:45
+          </p>
+
+          <p className="text-xs text-slate-400">
+            Toleransi 15 menit
+          </p>
+        </div>
 
       </div>
 
 
-      {/* MAIN */}
+      {/* PEGAWAI */}
+      <div className="flex items-center justify-between gap-3 rounded-2xl bg-[#f7fbff] p-3.5 sm:p-4">
 
-      <div className="mt-5 grid gap-5 lg:grid-cols-[1.65fr_0.85fr]">
+        <div className="min-w-0">
+          <p className="text-xs text-slate-400">
+            Pegawai Piket
+          </p>
 
-        {/* TODAY */}
+          <p className="mt-1 font-extrabold text-slate-800">
+            5 Pegawai
+          </p>
+        </div>
 
-        <section className="rounded-[25px] border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
+        <div className="flex shrink-0 -space-x-2">
+          {[1, 2, 3, 4].map((item) => (
+            <div
+              key={item}
+              className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-blue-100 text-[10px] font-bold text-blue-600 sm:h-9 sm:w-9 sm:text-xs"
+            >
+              {item}
+            </div>
+          ))}
+        </div>
 
-          <div className="mb-5 flex items-center justify-between">
+      </div>
 
-            <div>
+    </div>
 
-              <div className="flex items-center gap-2">
-                <CalendarDays
-                  size={20}
-                  className="text-blue-600"
-                />
 
-                <h2 className="font-extrabold">
-                  Piket Hari Ini
-                </h2>
-              </div>
+    {/* ================= DESKTOP TABLE ================= */}
+    <div className="hidden md:block overflow-x-auto">
 
-              <p className="mt-1 pl-7 text-xs text-slate-400">
-                18 September 2026
+      <table className="w-full text-left text-sm">
+
+        <thead className="bg-slate-50 text-xs text-slate-400">
+          <tr>
+            <th className="px-4 py-3">#</th>
+            <th className="px-4 py-3">Pegawai</th>
+            <th className="px-4 py-3">Jam Masuk</th>
+            <th className="px-4 py-3">Status</th>
+            <th className="px-4 py-3">Keterlambatan</th>
+            <th className="px-4 py-3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          {employees.map((employee) => (
+            <tr
+              key={employee.id}
+              className="border-b border-slate-100 last:border-0"
+            >
+
+              <td className="px-4 py-3 text-xs text-slate-400">
+                {employee.id}
+              </td>
+
+              <td className="px-4 py-3 font-semibold text-slate-700">
+                {employee.name}
+              </td>
+
+              <td className="px-4 py-3 text-slate-600">
+                {employee.time}
+              </td>
+
+              <td className="px-4 py-3">
+                <Status status={employee.status} />
+              </td>
+
+              <td className="px-4 py-3 text-xs font-semibold text-red-500">
+                {employee.late}
+              </td>
+
+              <td className="px-4 py-3 text-right">
+                <button
+                  className="rounded-lg p-2 text-slate-400 transition hover:bg-blue-50 hover:text-blue-600"
+                >
+                  <Edit3 size={16} />
+                </button>
+              </td>
+
+            </tr>
+          ))}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    {/* ================= MOBILE CARDS ================= */}
+    <div className="space-y-3 md:hidden">
+
+      {employees.map((employee) => (
+        <div
+          key={employee.id}
+          className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4"
+        >
+
+          {/* NAME + EDIT */}
+          <div className="flex items-start justify-between gap-3">
+
+            <div className="min-w-0">
+
+              <p className="truncate text-sm font-bold text-slate-800">
+                {employee.name}
+              </p>
+
+              <p className="mt-1 text-xs text-slate-400">
+                Jam masuk:{" "}
+                <span className="font-semibold text-slate-600">
+                  {employee.time}
+                </span>
               </p>
 
             </div>
 
-            <Link
-              href="/pickets"
-              className="text-xs font-bold text-blue-600"
+            <button
+              className="shrink-0 rounded-lg p-2 text-slate-400 transition hover:bg-blue-50 hover:text-blue-600"
             >
-              Lihat Detail →
-            </Link>
+              <Edit3 size={16} />
+            </button>
 
           </div>
 
 
-          {/* INFO */}
+          {/* STATUS */}
+          <div className="mt-3 flex items-center justify-between border-t border-slate-200 pt-3">
 
-          <div className="mb-5 grid gap-3 sm:grid-cols-2">
+            <Status status={employee.status} />
 
-            <div className="flex items-center gap-4 rounded-2xl bg-[#eff8ff] p-4">
-
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-blue-600">
-                <Clock3 size={24} />
-              </div>
-
-              <div>
-                <p className="text-xs text-slate-400">
-                  Jadwal Masuk
-                </p>
-
-                <p className="text-2xl font-black">
-                  08:45
-                </p>
-
-                <p className="text-xs text-slate-400">
-                  Toleransi 15 menit
-                </p>
-              </div>
-
-            </div>
-
-
-            <div className="flex items-center justify-between rounded-2xl bg-[#f7fbff] p-4">
-
-              <div>
-                <p className="text-xs text-slate-400">
-                  Pegawai Piket
-                </p>
-
-                <p className="mt-1 font-extrabold">
-                  5 Pegawai
-                </p>
-              </div>
-
-              <div className="flex -space-x-2">
-
-                {[1, 2, 3, 4].map((item) => (
-                  <div
-                    key={item}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-blue-100 text-xs font-bold text-blue-600"
-                  >
-                    {item}
-                  </div>
-                ))}
-
-              </div>
-
-            </div>
+            {employee.late !== "-" && (
+              <span className="text-xs font-semibold text-red-500">
+                {employee.late}
+              </span>
+            )}
 
           </div>
-
-
-          {/* TABLE */}
-
-          <div className="overflow-x-auto">
-
-            <table className="w-full min-w-[700px] text-left text-sm">
-
-              <thead className="bg-slate-50 text-xs text-slate-400">
-
-                <tr>
-                  <th className="px-4 py-3">#</th>
-                  <th className="px-4 py-3">Pegawai</th>
-                  <th className="px-4 py-3">Jam Masuk</th>
-                  <th className="px-4 py-3">Status</th>
-                  <th className="px-4 py-3">Keterlambatan</th>
-                  <th />
-                </tr>
-
-              </thead>
-
-              <tbody>
-
-                {employees.map((employee) => (
-                  <tr
-                    key={employee.id}
-                    className="border-b border-slate-100"
-                  >
-
-                    <td className="px-4 py-3 text-xs text-slate-400">
-                      {employee.id}
-                    </td>
-
-                    <td className="px-4 py-3 font-semibold">
-                      {employee.name}
-                    </td>
-
-                    <td className="px-4 py-3">
-                      {employee.time}
-                    </td>
-
-                    <td className="px-4 py-3">
-                      <Status status={employee.status} />
-                    </td>
-
-                    <td className="px-4 py-3 text-xs font-semibold text-red-500">
-                      {employee.late}
-                    </td>
-
-                    <td className="px-4 py-3 text-right">
-                      <button className="rounded-lg p-2 text-slate-400 hover:bg-blue-50 hover:text-blue-600">
-                        <Edit3 size={16} />
-                      </button>
-                    </td>
-
-                  </tr>
-                ))}
-
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </section>
-
-
-        {/* RIGHT */}
-
-        <div className="space-y-5">
-
-          <CalendarWidget />
-
-          <Recap />
 
         </div>
+      ))}
 
-      </div>
+    </div>
+
+  </section>
+
+
+  {/* RIGHT */}
+  <div className="min-w-0 space-y-4 sm:space-y-5">
+
+    <CalendarWidget />
+
+    <Recap />
+
+  </div>
+
+</div>
 
 
       {/* ACTIVITY */}
