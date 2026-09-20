@@ -1,69 +1,609 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+
+import {
+  ArrowRight,
+  CalendarDays,
+  CheckCircle2,
+  Clock3,
+  Edit3,
+  Plus,
+  Users,
+  ClipboardList,
+  BarChart3,
+  AlertCircle,
+  ChevronRight,
+} from "lucide-react";
+
+const employees = [
+  {
+    id: 1,
+    name: "Andi Pratama",
+    time: "08:30",
+    status: "Tepat waktu",
+    late: "-",
+  },
+  {
+    id: 2,
+    name: "Budi Santoso",
+    time: "08:45",
+    status: "Tepat waktu",
+    late: "-",
+  },
+  {
+    id: 3,
+    name: "Citra Lestari",
+    time: "08:52",
+    status: "Tepat waktu",
+    late: "-",
+  },
+  {
+    id: 4,
+    name: "Deni Maulana",
+    time: "09:05",
+    status: "Terlambat",
+    late: "20 menit",
+  },
+  {
+    id: 5,
+    name: "Eko Saputra",
+    time: "-",
+    status: "Belum absen",
+    late: "-",
+  },
+];
+
+export default function Dashboard() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="mx-auto max-w-[1500px] px-4 pt-5 sm:px-6 lg:px-8 lg:pt-7">
+
+      {/* HERO */}
+
+<section
+  className="relative w-full h-[300px] overflow-hidden rounded-3xl bg-[#eaf6ff] bg-cover bg-center"
+  style={{
+    backgroundImage: "url('/images/piketku-hero.png')",
+  }}
+>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/65 to-transparent" />
+
+  {/* Content */}
+  <div className="relative z-10 flex h-full items-center px-8 md:px-10">
+    <div className="max-w-lg">
+      <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700">
+        PiketKu
+      </span>
+
+      <h1 className="mt-4 text-3xl font-bold text-[#10264d] md:text-4xl">
+        Catat Kehadiran
+      </h1>
+
+      <p className="mt-3 text-sm leading-6 text-slate-600 md:text-base">
+        Kelola jadwal piket dan catat kehadiran pegawai
+        dengan lebih mudah dan teratur.
+      </p>
+
+      <button className="mt-5 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-200 hover:bg-blue-700">
+        + Tambah Piket
+      </button>
+    </div>
+  </div>
+</section>
+
+
+      {/* STATS */}
+
+      <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+
+        <Stat
+          icon={<Users />}
+          title="Total Pegawai"
+          value="24"
+          color="blue"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+
+        <Stat
+          icon={<ClipboardList />}
+          title="Piket Bulan Ini"
+          value="18"
+          color="red"
+        />
+
+        <Stat
+          icon={<CheckCircle2 />}
+          title="Tepat Waktu"
+          value="156"
+          badge="82%"
+          color="green"
+        />
+
+        <Stat
+          icon={<Clock3 />}
+          title="Terlambat"
+          value="34"
+          badge="18%"
+          color="red"
+        />
+
+      </div>
+
+
+      {/* MAIN */}
+
+      <div className="mt-5 grid gap-5 lg:grid-cols-[1.65fr_0.85fr]">
+
+        {/* TODAY */}
+
+        <section className="rounded-[25px] border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
+
+          <div className="mb-5 flex items-center justify-between">
+
+            <div>
+
+              <div className="flex items-center gap-2">
+                <CalendarDays
+                  size={20}
+                  className="text-blue-600"
+                />
+
+                <h2 className="font-extrabold">
+                  Piket Hari Ini
+                </h2>
+              </div>
+
+              <p className="mt-1 pl-7 text-xs text-slate-400">
+                18 September 2026
+              </p>
+
+            </div>
+
+            <Link
+              href="/pickets"
+              className="text-xs font-bold text-blue-600"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              Lihat Detail →
+            </Link>
+
+          </div>
+
+
+          {/* INFO */}
+
+          <div className="mb-5 grid gap-3 sm:grid-cols-2">
+
+            <div className="flex items-center gap-4 rounded-2xl bg-[#eff8ff] p-4">
+
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-blue-600">
+                <Clock3 size={24} />
+              </div>
+
+              <div>
+                <p className="text-xs text-slate-400">
+                  Jadwal Masuk
+                </p>
+
+                <p className="text-2xl font-black">
+                  08:45
+                </p>
+
+                <p className="text-xs text-slate-400">
+                  Toleransi 15 menit
+                </p>
+              </div>
+
+            </div>
+
+
+            <div className="flex items-center justify-between rounded-2xl bg-[#f7fbff] p-4">
+
+              <div>
+                <p className="text-xs text-slate-400">
+                  Pegawai Piket
+                </p>
+
+                <p className="mt-1 font-extrabold">
+                  5 Pegawai
+                </p>
+              </div>
+
+              <div className="flex -space-x-2">
+
+                {[1, 2, 3, 4].map((item) => (
+                  <div
+                    key={item}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-blue-100 text-xs font-bold text-blue-600"
+                  >
+                    {item}
+                  </div>
+                ))}
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          {/* TABLE */}
+
+          <div className="overflow-x-auto">
+
+            <table className="w-full min-w-[700px] text-left text-sm">
+
+              <thead className="bg-slate-50 text-xs text-slate-400">
+
+                <tr>
+                  <th className="px-4 py-3">#</th>
+                  <th className="px-4 py-3">Pegawai</th>
+                  <th className="px-4 py-3">Jam Masuk</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3">Keterlambatan</th>
+                  <th />
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                {employees.map((employee) => (
+                  <tr
+                    key={employee.id}
+                    className="border-b border-slate-100"
+                  >
+
+                    <td className="px-4 py-3 text-xs text-slate-400">
+                      {employee.id}
+                    </td>
+
+                    <td className="px-4 py-3 font-semibold">
+                      {employee.name}
+                    </td>
+
+                    <td className="px-4 py-3">
+                      {employee.time}
+                    </td>
+
+                    <td className="px-4 py-3">
+                      <Status status={employee.status} />
+                    </td>
+
+                    <td className="px-4 py-3 text-xs font-semibold text-red-500">
+                      {employee.late}
+                    </td>
+
+                    <td className="px-4 py-3 text-right">
+                      <button className="rounded-lg p-2 text-slate-400 hover:bg-blue-50 hover:text-blue-600">
+                        <Edit3 size={16} />
+                      </button>
+                    </td>
+
+                  </tr>
+                ))}
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
+
+        {/* RIGHT */}
+
+        <div className="space-y-5">
+
+          <CalendarWidget />
+
+          <Recap />
+
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+
+      </div>
+
+
+      {/* ACTIVITY */}
+
+      <section className="mt-5 rounded-[25px] border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
+
+        <div className="mb-5 flex justify-between">
+
+          <div className="flex items-center gap-2">
+            <Clock3
+              size={20}
+              className="text-blue-600"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+            <h2 className="font-extrabold">
+              Aktivitas Terbaru
+            </h2>
+          </div>
+
+          <button className="text-xs font-bold text-blue-600">
+            Lihat Semua →
+          </button>
+
         </div>
-      </main>
+
+        <div className="space-y-4">
+
+          <Activity
+            icon={<Clock3 size={17} />}
+            text="Andi Pratama mengisi jam masuk 08:30"
+            time="18 Sep 2026 • 08:31"
+          />
+
+          <Activity
+            icon={<CheckCircle2 size={17} />}
+            text="Citra Lestari mengisi jam masuk 08:52"
+            time="18 Sep 2026 • 08:54"
+          />
+
+          <Activity
+            icon={<AlertCircle size={17} />}
+            text="Deni Maulana terlambat 20 menit"
+            time="18 Sep 2026 • 09:06"
+          />
+
+        </div>
+
+      </section>
+
+    </div>
+  );
+}
+
+
+/* ================= COMPONENT ================= */
+
+function Stat({
+  icon,
+  title,
+  value,
+  badge,
+  color,
+}) {
+
+  const colors = {
+    blue: "bg-blue-50 text-blue-600",
+    red: "bg-red-50 text-red-500",
+    green: "bg-emerald-50 text-emerald-500",
+  };
+
+  return (
+    <div className="rounded-[22px] border border-blue-100 bg-white p-4 shadow-sm sm:p-5">
+
+      <div className="flex items-start justify-between">
+
+        <div
+          className={`flex h-11 w-11 items-center justify-center rounded-2xl ${colors[color]}`}
+        >
+          {icon}
+        </div>
+
+        {badge && (
+          <span className="rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-bold text-emerald-500">
+            {badge}
+          </span>
+        )}
+
+      </div>
+
+      <p className="mt-4 text-2xl font-black">
+        {value}
+      </p>
+
+      <p className="mt-1 text-xs text-slate-400">
+        {title}
+      </p>
+
+    </div>
+  );
+}
+
+
+function Status({ status }) {
+
+  const config = {
+    "Tepat waktu": {
+      color: "text-emerald-500",
+      dot: "bg-emerald-500",
+    },
+
+    "Terlambat": {
+      color: "text-red-500",
+      dot: "bg-red-500",
+    },
+
+    "Belum absen": {
+      color: "text-slate-400",
+      dot: "bg-slate-300",
+    },
+  };
+
+  const item = config[status];
+
+  return (
+    <span className={`inline-flex items-center gap-2 text-xs font-semibold ${item.color}`}>
+      <span className={`h-2.5 w-2.5 rounded-full ${item.dot}`} />
+      {status}
+    </span>
+  );
+}
+
+
+function CalendarWidget() {
+
+  const days = [
+    "", "", "1", "2", "3", "4", "5",
+    "6", "7", "8", "9", "10", "11", "12",
+    "13", "14", "15", "16", "17", "18", "19",
+    "20", "21", "22", "23", "24", "25", "26",
+    "27", "28", "29", "30", "", "", "",
+  ];
+
+  return (
+    <div className="rounded-[25px] border border-blue-100 bg-white p-5 shadow-sm">
+
+      <div className="mb-5 flex justify-between">
+
+        <h2 className="font-extrabold">
+          Kalender
+        </h2>
+
+        <a className="text-xs font-bold text-blue-600">
+          Lihat Semua
+        </a>
+
+      </div>
+
+      <div className="mb-5 flex items-center justify-between">
+
+        <button>
+          ←
+        </button>
+
+        <b className="text-sm">
+          September 2026
+        </b>
+
+        <button>
+          →
+        </button>
+
+      </div>
+
+      <div className="grid grid-cols-7 text-center">
+
+        {[
+          "Sen",
+          "Sel",
+          "Rab",
+          "Kam",
+          "Jum",
+          "Sab",
+          "Min",
+        ].map((day) => (
+          <span
+            key={day}
+            className="py-2 text-[10px] font-semibold text-slate-400"
+          >
+            {day}
+          </span>
+        ))}
+
+        {days.map((day, index) => (
+          <div
+            key={index}
+            className="flex h-8 items-center justify-center"
+          >
+            {day && (
+              <span
+                className={`flex h-7 w-7 items-center justify-center rounded-full text-xs ${
+                  day === "18"
+                    ? "bg-blue-600 font-bold text-white"
+                    : ["1", "2", "3", "4", "5", "8", "11", "12"].includes(day)
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-slate-500"
+                }`}
+              >
+                {day}
+              </span>
+            )}
+          </div>
+        ))}
+
+      </div>
+
+    </div>
+  );
+}
+
+
+function Recap() {
+
+  return (
+    <div className="rounded-[25px] border border-blue-100 bg-white p-5 shadow-sm">
+
+      <div className="mb-5 flex justify-between">
+
+        <h2 className="font-extrabold">
+          Rekap Bulan Ini
+        </h2>
+
+        <button className="text-xs font-bold text-blue-600">
+          Detail
+        </button>
+
+      </div>
+
+      <div className="space-y-4">
+
+        <div className="flex items-center gap-3">
+          <Users className="text-blue-600" />
+
+          <div>
+            <b>12</b>
+            <p className="text-xs text-slate-400">
+              Rata-rata piket/pegawai
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <CheckCircle2 className="text-emerald-500" />
+
+          <div>
+            <b>83%</b>
+            <p className="text-xs text-slate-400">
+              Persentase tepat waktu
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <Clock3 className="text-red-500" />
+
+          <div>
+            <b>214 menit</b>
+            <p className="text-xs text-slate-400">
+              Total keterlambatan
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
+
+
+function Activity({
+  icon,
+  text,
+  time,
+}) {
+
+  return (
+    <div className="flex items-center gap-3">
+
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+        {icon}
+      </div>
+
+      <div>
+        <p className="text-sm font-medium text-slate-600">
+          {text}
+        </p>
+
+        <p className="mt-1 text-[10px] text-slate-400">
+          {time}
+        </p>
+      </div>
+
     </div>
   );
 }
